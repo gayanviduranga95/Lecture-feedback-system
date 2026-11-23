@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Member 3 - Authentication Automation", () => {
-  test("AT-01: Student login with valid credentials", async ({ page }) => {
+  test("AT-01: Student login with valid credentials", async ({ page }, testInfo) => {
     // Open the Lecture Feedback System login page
     await page.goto("/login");
 
@@ -17,12 +17,12 @@ test.describe("Member 3 - Authentication Automation", () => {
 
     // Save evidence
     await page.screenshot({
-      path: "member3-evidence/AT-01-successful-login.png",
+      path: testInfo.outputPath("AT-01-successful-login.png"),
       fullPage: true,
     });
   });
 
-  test("AT-02: Student login with incorrect password", async ({ page }) => {
+  test("AT-02: Student login with incorrect password", async ({ page }, testInfo) => {
     // Open login page
     await page.goto("/login");
 
@@ -43,12 +43,12 @@ test.describe("Member 3 - Authentication Automation", () => {
 
     // Save evidence
     await page.screenshot({
-      path: "member3-evidence/AT-02-rejected-login.png",
+      path: testInfo.outputPath("AT-02-rejected-login.png"),
       fullPage: true,
     });
   });
 
-  test("AT-03: Student registration with valid details", async ({ page }) => {
+  test("AT-03: Student registration with valid details", async ({ page }, testInfo) => {
     // Generate a unique email for each test execution
     const email = `member3.${Date.now()}@lectures.test`;
     const password = "SecureStudent123!";
@@ -83,7 +83,7 @@ test.describe("Member 3 - Authentication Automation", () => {
 
     // Capture automation evidence
     await page.screenshot({
-      path: "../../Member3-Evidence/AT-03-successful-registration.png",
+      path: testInfo.outputPath("AT-03-successful-registration.png"),
       fullPage: true,
     });
   });
